@@ -1,14 +1,16 @@
 __author__ = 'fearsd'
+
  # this module requires to get username and for launch applications on computer.
 import os
-
 
 # sleep is used to print files pretilly.
 from time import sleep
 
-
 # datetime is used to write in logs current time of done command.     
-from datetime import datetime   
+from datetime import datetime
+
+# need for open site in default browser
+import webbrowser
 
 
 class UserExit(KeyboardInterrupt):
@@ -86,7 +88,7 @@ def invite_for_input():
     :return: command which user called.
     '''
 
-    command = input('Input command(list|new|done|read|open|write|calc|exit): ')
+    command = input('Input command(list|new|done|read|open|write|calc|music|exit): ')
     return command
 
 
@@ -98,7 +100,7 @@ def check_input(command, tasks):
     :return: None.
     '''
 
-    commands = ['list', 'new', 'exit', 'done', 'read', 'open' ,'write', 'calc']
+    commands = ['list', 'new', 'exit', 'done', 'read', 'open' ,'write', 'calc', 'music']
                       
     if command not in commands:
         print('Bad input')
@@ -116,6 +118,8 @@ def check_input(command, tasks):
         write_command()
     elif command == 'calc':
         calc_command()
+    elif command == 'music':
+        launch_music_command()
     else:
         exit_command()
 
@@ -203,7 +207,6 @@ def open_exe_command():
         'chrome':'C:\\Users\\' + username + '\\Desktop\\Chrome.lnk',
         'vscode': 'C:\\Users\\' + username + '\\Desktop\\VSCode.lnk',
         'cmd': 'C:\\Users\\' + username + '\\Desktop\\ConEmu.lnk',
-        'music': 'D:\\Music\\Shadows.mp3', # when I will be on the flat, change it to yandex music site
         'discord': 'C:\\Users\\' + username + '\\Desktop\\Discord.lnk',
         'mine': 'C:\\Users\\' + username + '\\Desktop\\Minecraft.lnk',
         'note': 'C:\\Users\\' + username + '\\Desktop\\Notepad++.lnk'
@@ -266,6 +269,8 @@ def exit_command():
     logger('exit')
     raise UserExit('See you next time!')
 
+def launch_music_command():
+    webbrowser.open_new_tab('http://music.yandex.ru/home')
 
 def main():
     '''
